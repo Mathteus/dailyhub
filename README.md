@@ -4,7 +4,7 @@ Dailyhub é um aplicação web instalavel (PWA) open-source, feita para seu dia 
 
 ## Features:
 
-### Prioridades
+### Core
 - [ ] Criar tarefas usando o sistema Kanban.
 - [ ] Vericar seus gastos mensais.
 - [ ] Verificar Temperatura Local.
