@@ -18,7 +18,7 @@ Dailyhub é um aplicação web instalavel (PWA) open-source, feita para seu dia 
 ## Para testar pode siga os seguintes passos ou teste online em breve [DailyHub](https://dailyhub.space).
 - Clone o repositório do Backend.
   ```
-  git clone https://github.com/Mathteus/dailyhub-frontend.git
+  git clone https://github.com/Mathteus/dailyhub-backend.git
   ```
   
 - Faça o build do projeto usando CMake.
