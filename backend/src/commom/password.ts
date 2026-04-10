@@ -100,7 +100,7 @@ export class Password {
 		return true;
 	}
 
-	public validatePassword(value: string) {
+	private validatePassword(value: string) {
 		this.validatePasswordLength(value);
 		if (this._config.needSpecial) {
 			this.validatePasswordSpecial(value);

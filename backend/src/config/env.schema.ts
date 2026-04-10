@@ -10,8 +10,8 @@ export const envSchema = z.object({
 		})
 		.describe('Port number'),
 	DATABASE_URL: z.url().optional().describe('Database URL'),
-	JWT_SECRET: z.string().min(10).optional().describe('JWT secret'),
-	REDIS_URL: z.url().optional().describe('Redis URL'),
+	JWT_SECRET: z.string().min(10).describe('JWT secret').optional(),
+	REDIS_URL: z.url().describe('Redis URL').optional(),
 	PEPPER: z.string().describe('Pepper'),
 });
 
