@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Accounts {
+  id String @id
+  email String @unique
+  password String
+  salt String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  @@map("acounts")
+}
+ 
