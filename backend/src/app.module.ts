@@ -4,6 +4,8 @@ import { envSchema } from './config/env.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
+import { AccountModule } from './domains/accounts/account.module';
+
 @Module({
 	imports: [
 		ConfigModule.forRoot({
@@ -22,6 +24,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 			autoSchemaFile: true,
 			sortSchema: true,
 		}),
+		AccountModule,
 	],
 })
 export class AppModule {}

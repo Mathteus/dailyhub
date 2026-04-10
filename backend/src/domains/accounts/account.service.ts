@@ -18,8 +18,10 @@ import {
 	InternalServerErrorException,
 	UnprocessableEntityException,
 } from '@nestjs/common';
+import { AccountEntity } from './account.entity';
 
 export interface ICreateAccount {
+	name: string;
 	email: string;
 	password: string;
 }
@@ -30,7 +32,7 @@ export interface ILoginAccount {
 }
 
 @Injectable()
-export class ServiceAccounts {
+export class AccountService {
 	constructor(private readonly database: AccountsRepository) {}
 
 	public async CreateAccount(data: ICreateAccount) {
@@ -55,6 +57,14 @@ export class ServiceAccounts {
 				password: hashedPassword,
 				salt: '',
 				identifier: identifier.value,
+				name: data.name,
+			});
+
+			return new AccountEntity({
+				id: identifier,
+				name: '',
+				email: email,
+				password: hashedPassword,
 			});
 		} catch (err) {
 			if (

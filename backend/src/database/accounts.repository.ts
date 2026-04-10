@@ -5,6 +5,7 @@ export class AccountNotFound extends Error {
 }
 
 export interface ICreateAccounRepository {
+	name: string;
 	email: string;
 	password: string;
 	salt: string;
@@ -12,8 +13,11 @@ export interface ICreateAccounRepository {
 }
 
 export interface IAccountResponse {
+	name: string;
 	email: string;
 	id: string;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export abstract class AccountsRepository {

@@ -14,6 +14,7 @@ export class AccountsPrisma implements AccountsRepository {
 				password: account.password,
 				salt: account.salt,
 				id: account.identifier,
+				name: account.name,
 			},
 		});
 	}
@@ -30,8 +31,11 @@ export class AccountsPrisma implements AccountsRepository {
 		}
 
 		return {
+			name: account.name,
 			email: account.email,
 			id: account.id,
+			createdAt: account.createdAt,
+			updatedAt: account.updatedAt,
 		};
 	}
 
@@ -47,8 +51,11 @@ export class AccountsPrisma implements AccountsRepository {
 		}
 
 		return {
+			name: account.name,
 			email: account.email,
 			id: account.id,
+			createdAt: account.createdAt,
+			updatedAt: account.updatedAt,
 		};
 	}
 
