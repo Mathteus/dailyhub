@@ -26,4 +26,7 @@ export abstract class AccountsRepository {
 	public abstract searchByEmail(email: string): Promise<IAccountResponse>;
 	public abstract searchById(id: string): Promise<IAccountResponse>;
 	public abstract getPasswordById(accountId: string): Promise<string>;
+	public abstract checkIfAccountExistsByEmail(
+		accountId: string,
+	): Promise<boolean>;
 }

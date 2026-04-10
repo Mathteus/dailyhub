@@ -43,9 +43,8 @@ export class AccountService {
 				config: DEFAULT_PASSWORD_CONFIG,
 			});
 
-			const checkIfAlreadyExists = await this.database.searchByEmail(
-				email.value,
-			);
+			const checkIfAlreadyExists =
+				await this.database.checkIfAccountExistsByEmail(email.value);
 			if (checkIfAlreadyExists) {
 				throw new ConflictException('Email already exists!');
 			}
@@ -102,7 +101,6 @@ export class AccountService {
 			}
 
 			const password_account = await this.database.getPasswordById(account.id);
-
 			const isPasswordValid = await comparePassword(password, password_account);
 			if (!isPasswordValid) {
 				throw new BadRequestException('Password is invalid!');

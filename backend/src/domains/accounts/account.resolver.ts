@@ -14,11 +14,11 @@ export class AccountResolver {
 
 	@Query(() => AccountObject)
 	async loginAccount(
-		@Args('data') data: LoginAccountInput,
+		@Args('account') account: LoginAccountInput,
 	): Promise<AccountObject> {
 		const accountEntity = await this.service.LoginAccount({
-			email: data.email,
-			password: data.password,
+			email: account.email,
+			password: account.password,
 		});
 		return {
 			id: accountEntity.id,

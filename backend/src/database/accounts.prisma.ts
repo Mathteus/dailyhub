@@ -80,4 +80,14 @@ export class AccountsPrisma implements AccountsRepository {
 
 		return account.password;
 	}
+
+	public async checkIfAccountExistsByEmail(email: string): Promise<boolean> {
+		const account = await prisma.accounts.findUnique({
+			where: {
+				email,
+			},
+		});
+
+		return account !== null;
+	}
 }
