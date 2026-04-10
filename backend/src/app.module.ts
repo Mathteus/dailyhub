@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './config/env.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { AccountModule } from './domains/accounts/account.module';
 
 @Module({
@@ -21,6 +21,7 @@ import { AccountModule } from './domains/accounts/account.module';
 		}),
 		GraphQLModule.forRoot<ApolloDriverConfig>({
 			driver: ApolloDriver,
+			plugins: [ApolloServerPluginLandingPageLocalDefault()],
 			autoSchemaFile: true,
 			sortSchema: true,
 		}),

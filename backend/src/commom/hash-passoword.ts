@@ -1,16 +1,17 @@
 import { validateEnv } from '@/config/env';
 
+import argon2 from 'argon2';
+
 export async function toHashPassword(password: string): Promise<string> {
 	const env = validateEnv();
 	const newPasswordSecurity = `${env.PEPPER}${password}`;
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-	const argonHash = await Bun.password.hash(newPasswordSecurity, {
-		algorithm: 'argon2id',
-		memoryCost: 4,
-		timeCost: 3,
-	});
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-	return argonHash;
+	const options = {
+		type: argon2.argon2id, // Recommended variant
+		memoryCost: 2 ** 16, // 64 MB
+		timeCost: 3, // 3 iterations
+		parallelism: 4, // 4 threads
+	};
+	return await argon2.hash(newPasswordSecurity, options);
 }
 
 export async function comparePassword(
@@ -19,6 +20,5 @@ export async function comparePassword(
 ): Promise<boolean> {
 	const env = validateEnv();
 	const newPasswordSecurity = `${env.PEPPER}${password}`;
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-	return await Bun.password.verify(newPasswordSecurity, hashedPassword);
+	return await argon2.verify(hashedPassword, newPasswordSecurity);
 }
