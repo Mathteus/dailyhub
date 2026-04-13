@@ -1,12 +1,8 @@
+import { DEFAULT_PASSWORD_CONFIG } from './constants';
+
 export class PasswordLenghtLessThanMin extends Error {
 	constructor() {
 		super('Password length is less than min!');
-	}
-}
-
-export class PasswordLenghtLessThanMax extends Error {
-	constructor() {
-		super('Password length is less than max!');
 	}
 }
 
@@ -30,21 +26,14 @@ export class PasswordUpperLessThanMin extends Error {
 
 export interface IPasswordConfig {
 	minLength: number;
-	maxLength: number;
-
-	needSpecial?: boolean;
 	minSpecial?: number;
-
-	needNumber?: boolean;
 	minNumber?: number;
-
-	needUpper?: boolean;
 	minUpper?: number;
 }
 
 export interface IPasswordParam {
-	password: string;
-	config: IPasswordConfig;
+	value: string;
+	config?: IPasswordConfig;
 }
 
 export class Password {
@@ -52,20 +41,9 @@ export class Password {
 	private _config: IPasswordConfig;
 
 	constructor(param: IPasswordParam) {
-		this._config = param.config;
-		this.validatePassword(param.password);
-		this._value = param.password;
-	}
-
-	private validatePasswordLength(value: string) {
-		if (value.length < this._config.minLength) {
-			throw new PasswordLenghtLessThanMin();
-		}
-
-		if (value.length > this._config.maxLength) {
-			throw new PasswordLenghtLessThanMax();
-		}
-		return true;
+		this._config = param.config || DEFAULT_PASSWORD_CONFIG;
+		this.validatePassword(param.value);
+		this._value = param.value;
 	}
 
 	private validatePasswordSpecial(value: string) {
@@ -76,7 +54,6 @@ export class Password {
 		) {
 			throw new PasswordSpecialLessThanMin();
 		}
-		return true;
 	}
 
 	private validatePasswordNumber(value: string) {
@@ -86,8 +63,6 @@ export class Password {
 		) {
 			throw new PasswordNumberLessThanMin();
 		}
-
-		return true;
 	}
 
 	private validatePasswordUpper(value: string) {
@@ -97,22 +72,22 @@ export class Password {
 		) {
 			throw new PasswordUpperLessThanMin();
 		}
-		return true;
 	}
 
 	private validatePassword(value: string) {
-		this.validatePasswordLength(value);
-		if (this._config.needSpecial) {
-			this.validatePasswordSpecial(value);
-		}
-		if (this._config.needNumber) {
-			this.validatePasswordNumber(value);
-		}
-		if (this._config.needUpper) {
-			this.validatePasswordUpper(value);
+		if (value.length < this._config.minLength) {
+			throw new PasswordLenghtLessThanMin();
 		}
 
-		this._value = value;
+		if (this._config.minSpecial) {
+			this.validatePasswordSpecial(value);
+		}
+		if (this._config.minNumber) {
+			this.validatePasswordNumber(value);
+		}
+		if (this._config.minUpper) {
+			this.validatePasswordUpper(value);
+		}
 	}
 
 	public get value(): string {

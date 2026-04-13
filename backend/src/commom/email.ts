@@ -1,6 +1,6 @@
-export class InvalidEmail extends Error {
+export class InvalidFormatEmail extends Error {
 	constructor() {
-		super('Email is invalid');
+		super('email is in an invalid format!');
 	}
 }
 
@@ -14,9 +14,8 @@ export class Email {
 
 	private validateEmail(value: string) {
 		if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
-			throw new InvalidEmail();
+			throw new InvalidFormatEmail();
 		}
-		return true;
 	}
 
 	get value(): string {

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AccountResolver } from './account.resolver';
 import { AccountsRepository } from '@/database/accounts.repository';
 import { AccountsPrisma } from '@/database/accounts.prisma';
-import { AccountService } from './account.service';
+import { AccountResolver } from '@/graphql/account.resolver';
+import { RegisterAccount } from './use-cases/register';
 
 @Module({
 	providers: [
@@ -11,8 +11,8 @@ import { AccountService } from './account.service';
 			provide: AccountsRepository,
 			useClass: AccountsPrisma,
 		},
-		AccountService,
+		RegisterAccount,
 	],
-	exports: [AccountResolver, AccountsRepository, AccountService],
+	exports: [AccountResolver, AccountsRepository, RegisterAccount],
 })
 export class AccountModule {}

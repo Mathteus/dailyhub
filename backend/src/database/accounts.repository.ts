@@ -8,8 +8,6 @@ export interface ICreateAccounRepository {
 	name: string;
 	email: string;
 	password: string;
-	salt: string;
-	identifier: string;
 }
 
 export interface IAccountResponse {

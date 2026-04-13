@@ -1,8 +1,8 @@
 import { Email } from '@/commom/email';
-import { Identifier } from '@/commom/indentifier';
+import { nanoid } from 'nanoid';
 
 export interface IAccountEntity {
-	id: Identifier;
+	id: string;
 	name: string;
 	email: Email;
 	password: string;
@@ -11,7 +11,7 @@ export interface IAccountEntity {
 }
 
 export interface IAccountEntityCreate {
-	id?: Identifier;
+	id?: string;
 	name: string;
 	email: Email;
 	password: string;
@@ -20,14 +20,14 @@ export interface IAccountEntityCreate {
 }
 
 export class AccountEntity {
-	private props: IAccountEntity;
+	private data: IAccountEntity;
 
 	constructor(accountToInitialize: IAccountEntityCreate) {
 		const preparedAccount = accountToInitialize;
-		preparedAccount['id'] = accountToInitialize.id || new Identifier();
+		preparedAccount['id'] = accountToInitialize.id || '';
 		preparedAccount['createdAt'] = accountToInitialize.createdAt || new Date();
 		preparedAccount['updatedAt'] = accountToInitialize.updatedAt || new Date();
-		this.props = {
+		this.data = {
 			id: preparedAccount.id,
 			email: preparedAccount.email,
 			name: preparedAccount.name,
@@ -38,26 +38,26 @@ export class AccountEntity {
 	}
 
 	get id(): string {
-		return this.props.id.value;
+		return this.data.id;
 	}
 
 	get email(): string {
-		return this.props.email.value;
+		return this.data.email.value;
 	}
 
 	get password(): string {
-		return this.props.password;
+		return this.data.password;
 	}
 
 	get name(): string {
-		return this.props.name;
+		return this.data.name;
 	}
 
 	get createdAt(): Date {
-		return this.props.createdAt;
+		return this.data.createdAt;
 	}
 
 	get updatedAt(): Date {
-		return this.props.updatedAt;
+		return this.data.updatedAt;
 	}
 }

@@ -5,18 +5,22 @@ import {
 	LoginAccountInput,
 } from './account.gql-types';
 import { Injectable } from '@nestjs/common';
-import { AccountService } from './account.service';
+import { RegisterAccount } from '@/domains/accounts/use-cases/register';
+import { LoginAccount } from '@/domains/accounts/use-cases/login';
 
 @Resolver()
 @Injectable()
 export class AccountResolver {
-	constructor(private readonly service: AccountService) {}
+	constructor(
+		private readonly loginAccount: LoginAccount,
+		private readonly registerAccount: RegisterAccount,
+	) {}
 
 	@Query(() => AccountObject)
-	async loginAccount(
+	async login(
 		@Args('account') account: LoginAccountInput,
 	): Promise<AccountObject> {
-		const accountEntity = await this.service.LoginAccount({
+		const accountEntity = await this.loginAccount.execute({
 			email: account.email,
 			password: account.password,
 		});
@@ -30,10 +34,14 @@ export class AccountResolver {
 	}
 
 	@Mutation(() => AccountObject)
-	async createAccount(
+	async register(
 		@Args('account') account: CreateAccountInput,
 	): Promise<AccountObject> {
-		const accountEntity = await this.service.CreateAccount(account);
+		const accountEntity = await this.registerAccount.execute({
+			name: account.name,
+			email: account.email,
+			password: account.password,
+		});
 		return {
 			id: accountEntity.id,
 			name: accountEntity.name,

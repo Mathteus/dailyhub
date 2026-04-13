@@ -12,8 +12,6 @@ export class AccountsPrisma implements AccountsRepository {
 			data: {
 				email: account.email,
 				password: account.password,
-				salt: account.salt,
-				id: account.identifier,
 				name: account.name,
 			},
 		});
