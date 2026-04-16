@@ -6,6 +6,7 @@ import { VscTools } from "react-icons/vsc";
 import { TbBrandBlogger } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { GrJava } from "react-icons/gr";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { useState } from "react";
 
 export type IItemSidebar = {
@@ -37,6 +38,10 @@ const itens: IItemSidebar[] = [
   {
     name: "Configurações",
     icon: IoSettingsOutline,
+  },
+  {
+    name: "Admin",
+    icon: MdOutlineAdminPanelSettings ,
   },
   {
     name: "Pague me um café",

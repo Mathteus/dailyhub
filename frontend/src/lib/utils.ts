@@ -13,7 +13,6 @@ export function roundNumber(num: number) {
   return String('0' + num);
 }
 
-export function timeFormated() {
-  const now = new Date();
+export function timeFormated(now: Date) {
   return `${roundNumber(now.getDate())}/${roundNumber(now.getMonth() + 1)}/${now.getFullYear()} ${roundNumber(now.getHours())}:${roundNumber(now.getMinutes())}:${roundNumber(now.getSeconds())}`;
 }

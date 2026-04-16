@@ -4,8 +4,8 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-import { Sidebar } from "@/components/home/sidebar";
-import { Content } from "@/components/home/content";
+import { Sidebar } from "@/components/base/sidebar";
+import { Content } from "@/components/base/content";
 
 export default function App() {
   return (

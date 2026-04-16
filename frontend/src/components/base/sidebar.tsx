@@ -8,7 +8,7 @@ import { ItensSidebar } from "./itens-sidebar";
 export function Sidebar() {
   return (
     <aside className="text-white w-64 h-full p-4 flex flex-col justify-between">
-      <Profile name="Matheus" />
+      <Profile />
       <hr />
         <ItensSidebar />
       <hr />
