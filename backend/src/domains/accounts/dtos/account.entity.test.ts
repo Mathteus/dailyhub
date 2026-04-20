@@ -48,4 +48,16 @@ describe('AccountEntity', () => {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		}).toThrow(InvalidFormatEmail);
 	});
+
+
+	test('it should be able to create a new accout without password', () => {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+		expect(() => {
+			new AccountEntity({
+				name: 'test',
+				email: new Email('test@com'),
+			});
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		}).toBeDefined();
+	});
 });

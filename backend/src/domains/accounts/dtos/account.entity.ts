@@ -14,7 +14,7 @@ export interface IAccountEntityCreate {
 	id?: string;
 	name: string;
 	email: Email;
-	password: string;
+	password?: string;
 	createdAt?: Date;
 	updatedAt?: Date;
 }
@@ -27,6 +27,7 @@ export class AccountEntity {
 		preparedAccount['id'] = accountToInitialize.id || '';
 		preparedAccount['createdAt'] = accountToInitialize.createdAt || new Date();
 		preparedAccount['updatedAt'] = accountToInitialize.updatedAt || new Date();
+		preparedAccount['password'] = accountToInitialize.password || '';
 		this.data = {
 			id: preparedAccount.id,
 			email: preparedAccount.email,

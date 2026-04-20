@@ -16,6 +16,7 @@ export interface IAccountResponse {
 	id: string;
 	createdAt: Date;
 	updatedAt: Date;
+	password: string;
 }
 
 export abstract class AccountsRepository {
@@ -24,7 +25,8 @@ export abstract class AccountsRepository {
 	public abstract searchByEmail(email: string): Promise<IAccountResponse>;
 	public abstract searchById(id: string): Promise<IAccountResponse>;
 	public abstract getPasswordById(accountId: string): Promise<string>;
+	public abstract getPasswordByEmail(email: string): Promise<string>;
 	public abstract checkIfAccountExistsByEmail(
-		accountId: string,
-	): Promise<boolean>;
+		email: string,
+	): Promise<void>;
 }

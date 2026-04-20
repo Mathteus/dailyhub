@@ -1,6 +1,5 @@
 import { DEFAULT_PASSWORD_CONFIG } from '@/commom/constants';
 import { Email, InvalidFormatEmail } from '@/commom/email';
-import { toHashPassword } from '@/commom/hash-passoword';
 import {
 	Password,
 	PasswordLenghtLessThanMin,
@@ -9,7 +8,7 @@ import {
 	PasswordUpperLessThanMin,
 } from '@/commom/password';
 import { compareTypes } from '@/commom/utils';
-import { AccountsRepository } from '@/database/accounts.repository';
+import { AccountNotFound, AccountsRepository } from '@/database/accounts.repository';
 import {
 	ConflictException,
 	UnprocessableEntityException,
@@ -18,6 +17,7 @@ import {
 	Injectable,
 } from '@nestjs/common';
 import { AccountEntity } from '../dtos/account.entity';
+import { HashPassword } from '@/commom/hash-passoword';
 
 export interface IRegisterAccount {
 	name: string;
@@ -37,13 +37,11 @@ export class RegisterAccount {
 				config: DEFAULT_PASSWORD_CONFIG,
 			});
 
-			const checkIfAlreadyExists =
-				await this.database.checkIfAccountExistsByEmail(email.value);
-			if (checkIfAlreadyExists) {
-				throw new ConflictException('Email already exists!');
-			}
+			await this.database.checkIfAccountExistsByEmail(email.value);
 
-			const hashedPassword = await toHashPassword(password.value);
+			const passwordChecker = new HashPassword(password.value);
+			const hashedPassword = await passwordChecker.toHashPassword();
+
 			await this.database.create({
 				email: email.value,
 				password: hashedPassword,
@@ -65,15 +63,15 @@ export class RegisterAccount {
 					PasswordUpperLessThanMin,
 				])
 			) {
-				throw new UnprocessableEntityException();
+				throw new UnprocessableEntityException(err.message);
 			}
 
 			if (err instanceof Error) {
 				throw new BadRequestException(err.message);
 			}
 
-			if (err instanceof ConflictException) {
-				throw err;
+			if (err instanceof AccountNotFound) {
+				throw new ConflictException(err.message);
 			}
 
 			throw new InternalServerErrorException(JSON.stringify(err));

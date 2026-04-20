@@ -34,6 +34,7 @@ export class AccountsPrisma implements AccountsRepository {
 			id: account.id,
 			createdAt: account.createdAt,
 			updatedAt: account.updatedAt,
+			password: account.password,
 		};
 	}
 
@@ -54,6 +55,7 @@ export class AccountsPrisma implements AccountsRepository {
 			id: account.id,
 			createdAt: account.createdAt,
 			updatedAt: account.updatedAt,
+			password: account.password,
 		};
 	}
 
@@ -79,13 +81,29 @@ export class AccountsPrisma implements AccountsRepository {
 		return account.password;
 	}
 
-	public async checkIfAccountExistsByEmail(email: string): Promise<boolean> {
+		public async getPasswordByEmail(accountEmail: string): Promise<string> {
+		const account = await prisma.accounts.findUnique({
+			where: {
+				email: accountEmail,
+			},
+		});
+
+		if (!account) {
+			throw new AccountNotFound();
+		}
+
+		return account.password;
+	}
+
+	public async checkIfAccountExistsByEmail(email: string): Promise<void> {
 		const account = await prisma.accounts.findUnique({
 			where: {
 				email,
 			},
 		});
 
-		return account !== null;
+		 if (account !== null) {
+			throw new AccountNotFound();
+		 }
 	}
 }

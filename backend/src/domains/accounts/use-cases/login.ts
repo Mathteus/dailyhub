@@ -1,5 +1,4 @@
 import { Email } from '@/commom/email';
-import { comparePassword } from '@/commom/hash-passoword';
 import { AccountsRepository } from '@/database/accounts.repository';
 import {
 	BadRequestException,
@@ -7,6 +6,7 @@ import {
 	InternalServerErrorException,
 } from '@nestjs/common';
 import { AccountEntity } from '../dtos/account.entity';
+import { HashPassword } from '@/commom/hash-passoword';
 
 export interface ILoginAccount {
 	email: string;
@@ -24,16 +24,8 @@ export class LoginAccount {
 		try {
 			const emailAccount = new Email(email);
 			const account = await this.database.searchByEmail(emailAccount.value);
-			if (!account) {
-				throw new BadRequestException('Email not found!');
-			}
-
-			const password_account = await this.database.getPasswordById(account.id);
-			const isPasswordValid = await comparePassword(password, password_account);
-			if (!isPasswordValid) {
-				throw new BadRequestException('Password is invalid!');
-			}
-
+			const password_checker = new HashPassword(password);
+			await password_checker.confirmPassword(account.password);
 			return new AccountEntity({
 				id: account.id,
 				name: account.name,
