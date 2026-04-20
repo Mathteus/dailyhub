@@ -1,5 +1,4 @@
-import { Identifier } from '@/commom/indentifier';
-import { AccountEntity } from '../accounts/dtos/account.entity';
+import { AccountEntity } from '../../accounts/dtos/account.entity';
 
 export enum TaskStatus {
 	Pending = 'pendente',
@@ -9,7 +8,7 @@ export enum TaskStatus {
 }
 
 export interface ITaskEntity {
-	id: Identifier;
+	id: string;
 	name: string;
 	description: string;
 	createdAt: Date;
@@ -19,7 +18,7 @@ export interface ITaskEntity {
 }
 
 export interface ITaskCreateEntity {
-	id: Identifier;
+	id?: string;
 	name: string;
 	account: AccountEntity;
 	description?: string;
@@ -32,12 +31,13 @@ export class TaskEntity {
 	private _task: ITaskEntity;
 
 	constructor(task: ITaskCreateEntity) {
+		const identifier = task.id || '';
 		const description = task.description || '';
 		const createdAt = task.createdAt || new Date();
 		const updatedAt = task.updatedAt || createdAt;
 		const status = task.status || TaskStatus.Pending;
 		this._task = {
-			id: task.id,
+			id: identifier,
 			name: task.name,
 			description,
 			createdAt,
@@ -48,7 +48,7 @@ export class TaskEntity {
 	}
 
 	get id(): string {
-		return this._task.id.value;
+		return this._task.id;
 	}
 
 	get name(): string {
