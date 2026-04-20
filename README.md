@@ -1,47 +1,50 @@
-# Dailyhub (WIP)
+# DailyHub
 
-Dailyhub é um aplicação web instalavel (PWA) open-source, feita para seu dia dia focado em agilizar coisas da sua rotina.
+Uma plataforma fullstack focada em produtividade, controle financeiro e interação com conteúdo — construída com uma arquitetura que prioriza o backend, utilizando NestJS e Bun.
 
-## Features:
+## 🚀 Tecnologias
 
-### Core
-- [ ] Criar tarefas usando o sistema Kanban.
-- [ ] Vericar seus gastos mensais.
-- [ ] Verificar Temperatura Local.
-- [ ] Ler as ultimas noticias que estão saindo.
-- [ ] Publicar posts para comunidade Ler.
+* Backend: Node.js (Bun), NestJS
+* Frontend: Next.js
+* Banco de dados: PostgreSQL (ou o que estiver usando)
+* DevOps: Docker, CI/CD
 
-### Próximas versoẽs:
-- [ ] Melhor Vizualização de seus gastos, datas de vencimentos, categorias.
-- [ ] Mais Interação nos Posts, como poder responder posts.
+## 🧠 Arquitetura
 
-## Para testar pode siga os seguintes passos ou teste online em breve [DailyHub](https://dailyhub.space).
-- Clone o repositório do Backend.
-  ```
-  git clone https://github.com/Mathteus/dailyhub-backend.git
-  ```
-  
-- Faça o build do projeto usando CMake.
+* Arquitetura modular (módulos NestJS)
+* Separação de responsabilidades (controladores, serviços, repositórios)
+* Design de API escalável
 
-- Rode o Porgrama
-  ```
-  ./DailyHub_Server
-  ```
-- Clone o repositório do Frontend.
-  ```
-  git clone https://github.com/Mathteus/dailyhub-frontend.git
-  ```
-- Instale os pacotes.
-  ```
-  bun install
-  ```
-- Rode o servidor do NextJS.
-  ```
-  bun --bun dev
-  ```
-- Acesse a página do site.
-  ```
-  http://localhost:3210
-  ```
+## 🔥 Funcionalidades
 
-### OBS: a função de instalar (PWA) pode não funcionar em HTTP.
+* Sistema de controle financeiro
+* Gerenciamento de tarefas
+* Sistema de publicação de conteúdo
+* Integração com assistente de IA
+* Autenticação e gerenciamento de usuários
+
+## ⚙️ Destaques do Backend
+
+* Design de API RESTful
+* Validação de entrada (Zod / class-validator)
+* Autenticação (JWT)
+* Estratégia de tratamento de erros
+* Estrutura de pastas escalável
+
+## 🐳 Executando localmente
+
+```bash
+bun install
+bun run dev
+```
+
+## 📌 Melhorias Futuras
+
+* Camada de cache (Redis)
+* Sistema de filas
+* Arquitetura de microsserviços
+* Observabilidade (logs/métricas)
+
+## 👨‍💻 Autor
+
+Matheus Henrique
