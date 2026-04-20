@@ -1,8 +1,12 @@
+import { z } from 'zod';
+
 export class InvalidFormatEmail extends Error {
 	constructor() {
 		super('email is in an invalid format!');
 	}
 }
+
+const emailSchema = z.email();
 
 export class Email {
 	private _value: string;
@@ -13,7 +17,7 @@ export class Email {
 	}
 
 	private validateEmail(value: string) {
-		if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
+		if (!emailSchema.safeParse(value).success) {
 			throw new InvalidFormatEmail();
 		}
 	}
