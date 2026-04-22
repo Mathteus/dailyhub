@@ -13,6 +13,7 @@ export const envSchema = z.object({
 	JWT_SECRET: z.string().min(10).describe('JWT secret').optional(),
 	REDIS_URL: z.url().describe('Redis URL').optional(),
 	PEPPER: z.string().describe('Pepper'),
+	GROQ_API_KEY: z.string().describe('Groq Api Key'),
 });
 
 export type EnvSchema = z.infer<typeof envSchema>;
