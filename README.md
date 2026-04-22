@@ -5,31 +5,39 @@ Uma plataforma fullstack focada em produtividade, controle financeiro e interaç
 ## 🚀 Tecnologias
 
 * Backend: Node.js (Bun), NestJS
-* Frontend: Next.js
-* Banco de dados: PostgreSQL (ou o que estiver usando)
-* DevOps: Docker, CI/CD
+* Frontend: Vite + React
+* Banco de dados: PostgreSQL
+* DevOps: Docker, Github Actions
 
 ## 🧠 Arquitetura
 
 * Arquitetura modular (módulos NestJS)
 * Separação de responsabilidades (controladores, serviços, repositórios)
-* Design de API escalável
+* Design de DDD (entidades, testes, use-cases)
 
 ## 🔥 Funcionalidades
 
-* Sistema de controle financeiro
+* Central de ultimas noticias, clima.
+* Sistema de controle financeiro simples
 * Gerenciamento de tarefas
 * Sistema de publicação de conteúdo
-* Integração com assistente de IA
 * Autenticação e gerenciamento de usuários
+* Ferramentos uteis para dia-dia
+  * Encurtador de links
+  * conversoes (moeda, temperatura, tempo, distancia, energia, pesos)
+  * criar PDF apartir de textos markdown
+  * paleta de cores aleagorias
+  * geradores (senha)
 
 ## ⚙️ Destaques do Backend
 
-* Design de API RESTful
+* Design de API GraphQL
 * Validação de entrada (Zod / class-validator)
 * Autenticação (JWT)
 * Estratégia de tratamento de erros
 * Estrutura de pastas escalável
+* Camada de cache (Redis)
+* Observabilidade (logs/métricas)
 
 ## 🐳 Executando localmente
 
@@ -38,12 +46,10 @@ bun install
 bun run dev
 ```
 
-## 📌 Melhorias Futuras
-
-* Camada de cache (Redis)
+## 📌 Futuro Melhorias / Funcionalidades
 * Sistema de filas
 * Arquitetura de microsserviços
-* Observabilidade (logs/métricas)
+* Integração com assistente de IA
 
 ## 👨‍💻 Autor
 
